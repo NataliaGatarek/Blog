@@ -6,12 +6,12 @@ function SideBar() {
   return (
     <div className="sidebar">
       <div className="sidebarItem">
-        <span className="sidebarItem">About me</span>
+        <span className="sidebarTitle">About me</span>
         <img src={about} alt="about" />
         <p>some random text</p>
       </div>
       <div className="sidebarItem">
-        <span className="sidebarItem">Categories</span>
+        <span className="sidebarTitle">Categories</span>
         <ul className="sidebarList">
           <li className="sidebarListItem">Life</li>
           <li className="sidebarListItem">Dogs</li>
@@ -19,7 +19,7 @@ function SideBar() {
         </ul>
       </div>
       <div className="sidebarItem">
-        <span className="sidebarItem">Follow us</span>
+        <span className="sidebarTitle">Follow us</span>
         <div className="sidebarSocial">
           <i className="sidebarIcon fab fa-instagram"></i>
         </div>
