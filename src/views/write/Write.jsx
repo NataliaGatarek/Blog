@@ -1,9 +1,11 @@
 import React from "react";
 import "./Write.css";
+import SMt from "../../components/header/img2/about.jpg";
 
 function Write() {
   return (
     <div className="write">
+      <img src={SMt} alt="smt" className="writeImg" />
       <form className="writeForm">
         <div className="writeFormGroup">
           <label htmlFor="fileInput">
