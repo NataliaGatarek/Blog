@@ -24,14 +24,12 @@ function TopBar() {
               ABOUT
             </Link>
           </li>
-          <li className="topListItem">GALLERY</li>
+          {/* <li className="topListItem">GALLERY</li> */}
           <li className="topListItem">
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-              CONTACT
-            </Link>
-          </li>
-          <li className="topListItem">
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/write"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               WRITE
             </Link>
           </li>
