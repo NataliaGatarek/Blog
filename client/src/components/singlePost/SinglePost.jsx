@@ -1,14 +1,30 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 import "./SinglePost.css";
-import postImg from "../toolbar/img/ja.jpg";
+import axios from "axios";
 
 function SinglePost() {
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const res = await axios.get("/posts" + path);
+      setPost(res.data);
+    };
+    fetchPost();
+  }, [path]);
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img src={postImg} alt="img" className="singlePostImg" />
+        {post.photo && (
+          <img src={post.photo} alt="img" className="singlePostImg" />
+        )}
         <h1 className="singlePostTitle">
-          Lorem
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fas fa-edit"></i>
             <i className="singlePostIcon fas fa-trash-alt"></i>
@@ -16,34 +32,16 @@ function SinglePost() {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>name </b>
+            Author:
+            <Link to={`/?user=${post.username}`} className="link">
+              <b>{post.username} </b>
+            </Link>
           </span>
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createdAt).toStringDate}
+          </span>
         </div>
-        <p className="singlePostDescription">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-          felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-          consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-          nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-          venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-          Integer tincidunt.Lorem ipsum dolor sit amet, consectetuer adipiscing
-          elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-          natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-          mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-          sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-          aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-          imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-          mollis pretium. Integer tincidunt.Lorem ipsum dolor sit amet,
-          consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-          massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-          nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-          eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
-          justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim
-          justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-          felis eu pede mollis pretium. Integer tincidunt.
-        </p>
+        <p className="singlePostDescription">{post.description}</p>
       </div>
     </div>
   );
