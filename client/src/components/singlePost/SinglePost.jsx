@@ -11,7 +11,7 @@ function SinglePost() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await axios.get("/posts" + path);
+      const res = await axios.get("/post" + path);
       setPost(res.data);
     };
     fetchPost();

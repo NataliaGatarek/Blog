@@ -43,3 +43,7 @@
   color: white;
   border-radius: 10px;
 }
+.loginButton:disabled {
+  cursor: not-allowed;
+  background-color: coral;
+}
