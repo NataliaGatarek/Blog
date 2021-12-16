@@ -7,9 +7,11 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoriesRoute = require("./routes/category");
 const multer = require("multer");
+const path = require("path");
 const cors = require("cors");
 
 dotenv.config();
+
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -27,6 +29,8 @@ const upload = multer({ storage: storage });
 app.post("/upload", upload.single("file"), (req, res) => {
     res.status(200).json("File uploaded")
 });
+
+app.use("/images", express.static(path.join(_dirname, "/images")));
 
 app.use(express.json());
 app.use(cors());

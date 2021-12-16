@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import "./Write.css";
-import SMt from "../../components/header/img2/about.jpg";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
@@ -39,18 +38,26 @@ function Write() {
   };
   return (
     <div className="write">
-      <img src={SMt} alt="smt" className="writeImg" />
+      {file && (
+        <img src={URL.createObjectURL(file)} alt="smt" className="writeImg" />
+      )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
           <label htmlFor="fileInput">
             <i className="writeIcon fas fa-plus"></i>
           </label>
-          <input type="file" id="fileInput" style={{ display: "none" }} />
+          <input
+            type="file"
+            id="fileInput"
+            style={{ display: "none" }}
+            onChange={(e) => setFile(e.target.value[0])}
+          />
           <input
             type="text"
-            placeholder="title"
+            placeholder="Title"
             className="writeInput"
             autoFocus={true}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">
@@ -58,7 +65,8 @@ function Write() {
             placeholder="Tell your story..."
             type="text"
             className="writeInput writeText"
-          ></textarea>
+            onChange={(e) => setDesc(e.target.value)}
+          />
         </div>
         <button className="writeSubmit" type="submit">
           Publish

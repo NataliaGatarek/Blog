@@ -9,7 +9,7 @@ function SideBar() {
 
   useEffect(() => {
     const fetchCats = async () => {
-      const res = await axios.ge("/categories");
+      const res = await axios.get("/categories");
       setCats(res.data);
     };
     fetchCats();
