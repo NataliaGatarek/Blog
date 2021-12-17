@@ -16,6 +16,8 @@ dotenv.config();
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true
 }).then(console.log("Connected to Mongo")).catch(err => console.log(err));
 
 const storage = multer.diskStorage({
@@ -37,7 +39,7 @@ app.use(cors());
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
-app.use("/post", postRoute);
+app.use("/posts", postRoute);
 app.use("/categories", categoriesRoute);
 
 app.listen("5000", () => {
